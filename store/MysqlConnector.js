@@ -6,4 +6,17 @@ var connection = mysql.createConnection({
   database : 'accountbook'
 });
 
-module.exports = { connection };
+function healthCheck() {
+  //
+  // connection.connect();
+
+  connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+    if (err) throw err;
+    console.log('Mysql Connection OK..');
+    console.dir(connection.config);
+  });
+
+  // connection.end();
+}
+
+module.exports = { connection, healthCheck };
