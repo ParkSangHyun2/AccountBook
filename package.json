@@ -8,6 +8,8 @@
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "bootstrap": "^5.0.0-beta3",
+    "bootstrap-icons": "^1.4.1",
+    "chart.js": "^3.1.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "^3.1.6",

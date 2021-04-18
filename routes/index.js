@@ -43,4 +43,15 @@ router.get('/sample', function(req, res, next) {
 
 });
 
+
+router.get('/profile', function(req, res, next) {
+  //
+  res.render('profile');
+});
+
+router.get('/statistics', function(req, res, next) {
+  //
+  res.render('statistics');
+});
+
 module.exports = router;
