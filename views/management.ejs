@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <%- include('./head.ejs') %>
+</head>
+
+<body>
+<div>
+    <div class="card" style="width: 40rem; padding: 20px; background-color: #00B7FF">
+        <h3>입금</h3>
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping" style="width: 70px">내용  </span>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+        </div>
+        <br />
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping" style="width: 70px">금액  </span>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+        </div>
+        <br />
+        <div class="input-group flex-nowrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" style="padding-left: 0">
+                        <span class="input-group-text" id="addon-wrapping" style="width: 70px">내 지갑</span>
+                    </div>
+                    <div class="col-sm" style="padding-top: 10px">
+                        <span>한솔 지갑</span>
+                    </div>
+                    <div class="col-sm" style="padding-right: 0">
+                        <div class="dropdown" style="text-align: right">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="management_dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                지갑선택
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="management_dropdown">
+                                <li><a class="dropdown-item" href="#">한솔 지갑</a></li>
+                                <li><a class="dropdown-item" href="#">상현(돈모으자)</a></li>
+                                <li><a class="dropdown-item" href="#">도훈 지갑</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="width: 40rem; padding: 20px; background-color: lightpink">
+        <h3>출금</h3>
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping" style="width: 70px">내용  </span>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+        </div>
+        <br />
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping" style="width: 70px">금액  </span>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+        </div>
+        <br />
+        <div class="input-group flex-nowrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" style="padding-left: 0">
+                        <span class="input-group-text" id="addon-wrapping" style="width: 70px">내 지갑</span>
+                    </div>
+                    <div class="col-sm" style="padding-top: 10px">
+                        <span>한솔 지갑</span>
+                    </div>
+                    <div class="col-sm" style="padding-right: 0">
+                        <div class="dropdown" style="text-align: right">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="management_dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                지갑선택
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="management_dropdown">
+                                <li><a class="dropdown-item" href="#">한솔 지갑</a></li>
+                                <li><a class="dropdown-item" href="#">상현(돈모으자)</a></li>
+                                <li><a class="dropdown-item" href="#">도훈 지갑</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -60,4 +60,9 @@ router.get('/sidebar', function(req, res, next) {
   res.render('sidebar');
 });
 
+router.get('/management', async function(req, res, next) {
+  //
+  res.render('management', {});
+});
+
 module.exports = router;
