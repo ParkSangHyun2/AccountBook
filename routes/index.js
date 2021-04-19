@@ -54,4 +54,10 @@ router.get('/statistics', function(req, res, next) {
   res.render('statistics');
 });
 
+
+router.get('/sidebar', function(req, res, next) {
+  //
+  res.render('sidebar');
+});
+
 module.exports = router;
