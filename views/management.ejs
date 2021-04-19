@@ -2,6 +2,29 @@
 <html lang="ko">
 <head>
     <%- include('./head.ejs') %>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function save(isIncome) {
+          let contents ="";
+          let amount = 0;
+
+          if(isIncome) {
+            contents = document.getElementById('card_input_income_contents').value;
+            amount = document.getElementById('card_input_income_amount').value;
+          } else {
+            contents = document.getElementById('card_input_outcome_contents').value;
+            amount = document.getElementById('card_input_outcome_amount').value;
+          }
+
+          axios.post('/management/save', {
+            contents,
+            amount,
+            walletId: 1,
+            isIncome,
+          });
+        }
+    </script>
+    <title>AccountBook</title>
 </head>
 
 <body>
@@ -10,12 +33,12 @@
         <h3>입금</h3>
         <div class="input-group flex-nowrap">
             <span class="input-group-text" id="addon-wrapping" style="width: 70px">내용  </span>
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+            <input id="card_input_income_contents" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
         </div>
         <br />
         <div class="input-group flex-nowrap">
             <span class="input-group-text" id="addon-wrapping" style="width: 70px">금액  </span>
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+            <input id="card_input_income_amount" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
         </div>
         <br />
         <div class="input-group flex-nowrap">
@@ -42,6 +65,8 @@
                 </div>
             </div>
         </div>
+        <br />
+        <button class="btn btn-success" onclick="save(true)">저장</button>
     </div>
     <div class="card" style="width: 40rem; padding: 20px; background-color: lightpink">
         <h3>출금</h3>
@@ -78,6 +103,7 @@
                     </div>
                 </div>
             </div>
+            <button class="btn btn-success" onclick="save(false)">저장</button>
         </div>
     </div>
 </div>

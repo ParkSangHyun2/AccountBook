@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const { getSample } = require('../store/mysql/SampleStore');
 var { connection } = require('../store/MysqlConnector');
+const { saveReceipt } = require('../store/mysql/ManagementStore');
 
 
 
@@ -17,14 +18,6 @@ router.get('/home', async function(req, res, next) {
     res.render('home', { title: 'hello', result });
   });
 });
-
-
-
-
-
-
-
-
 
 //데이터 가공시..GET
 router.get('/sample', function(req, res, next) {
@@ -57,12 +50,19 @@ router.get('/statistics', function(req, res, next) {
 
 router.get('/sidebar', function(req, res, next) {
   //
-  res.render('sidebar');
+  res.render('sidebar', { });
 });
 
 router.get('/management', async function(req, res, next) {
   //
   res.render('management', {});
+});
+
+router.post('/management/save', async function(req, res, next) {
+  const result = req.body;
+
+  saveReceipt(result.contents, result.amount, result.walletId, result.isIncome, () => {console.log('저장되었습니다.')})
+  res.render('management', {popup: '저장되었습니다.'});
 });
 
 module.exports = router;
