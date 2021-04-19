@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="stylesheet" href="/stylesheets/wrapper.css" type="text/css">
+    <script>
+      let isIncome = false;
+
+      function tabChange(type) {
+        isIncome = (type === 'INCOME');
+
+        location.href = `/accountbook/main?type=${type}`;
+      }
+    </script>
+</head>
+
+<body>
+    <%- include('../sidebar.ejs') %>
+    <div class="contents_container">
+        <h1>메인페이지</h1>
+        <div class="main_contents_graph" style="background-color: beige">그래프 공간</div>
+
+        <br />
+
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="main_page_wallet_dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            선택
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="main_page_wallet_dropdown">
+                            <li><a class="dropdown-item" href="#">한솔 지갑</a></li>
+                            <li><a class="dropdown-item" href="#">상현 지갑</a></li>
+                            <li><a class="dropdown-item" href="#">토리 지갑</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-6"></div>
+                <div class="col-4">
+                    <div class="table_switch">
+                        <input
+                                type="radio"
+                                class="btn-check"
+                                name="options-outlined"
+                                id="success-outlined"
+                                autocomplete="off"
+                                <%= type ? 'checked' : null %>
+                        >
+                        <label class="btn btn-outline-success" for="success-outlined" onclick="tabChange('INCOME')">수입</label>
+                    </div>
+                    <div class="table_switch">
+                        <input
+                                type="radio"
+                                class="btn-check"
+                                name="options-outlined"
+                                id="danger-outlined"
+                                autocomplete="off"
+                                <%= !type ? 'checked' : null %>
+                        >
+                        <label class="btn btn-outline-danger" for="danger-outlined" onclick="tabChange('OUTCOME')">지출</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table>
+            <tr>
+                <th>번호</th>
+                <th>내용</th>
+                <th>금액</th>
+                <th>지갑</th>
+                <th>날짜</th>
+            </tr>
+            <%for(var i = 0; i < results.length; i++){%>
+                <tr id="myTable">
+                    <td><%= i + 1 %></td>
+                    <td><%= results[i].title %></td>
+                    <td><%= results[i].amount %></td>
+                    <td><%= results[i].pocket_id %></td>
+                    <td><%= new Date(results[i].date).getFullYear() + '-' + (new Date(results[i].date).getMonth() + 1).toString().padStart(2, '0') + '-' + new Date(results[i].date).getDate().toString().padStart(2, '0') %></td>
+                </tr>
+            <%}%>
+        </table>
+
+    </div>
+</body>
+</html>
+
+
+
+

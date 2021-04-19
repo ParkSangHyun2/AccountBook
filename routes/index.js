@@ -61,7 +61,7 @@ router.get('/management', async function(req, res, next) {
 router.post('/management/save', async function(req, res, next) {
   const result = req.body;
 
-  saveReceipt(result.contents, result.amount, result.walletId, result.isIncome, () => {console.log('저장되었습니다.')})
+  saveReceipt(result.contents, result.amount, result.walletId, result.isIncome, result.date, () => {console.log('저장되었습니다.')})
   res.render('management', {popup: '저장되었습니다.'});
 });
 

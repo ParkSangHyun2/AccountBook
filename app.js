@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var pageRouter = require('./routes/PageRouter');
+var storeRequester = require('./routes/StoreRequester');
 
 var { healthCheck } = require('./store/MysqlConnector');
 
@@ -13,6 +15,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views', 'pages'));
 // app.set('view engine', 'jade');
 app.set('view engine', 'ejs');
 
@@ -26,6 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/accountbook', pageRouter);
+app.use('/store', storeRequester);
 
 
 // catch 404 and forward to error handler

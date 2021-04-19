@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="stylesheet" href="/stylesheets/wrapper.css" type="text/css">
+    <script>
+      function save(isIncome) {
+        let contents ="";
+        let amount = 0;
+
+        if(isIncome) {
+          contents = document.getElementById('card_input_income_contents').value;
+          amount = document.getElementById('card_input_income_amount').value;
+        } else {
+          contents = document.getElementById('card_input_outcome_contents').value;
+          amount = document.getElementById('card_input_outcome_amount').value;
+        }
+
+        axios.post('/management/save', {
+          contents,
+          amount,
+          walletId: 1,
+          isIncome,
+          date: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
+        });
+
+        alert('저장되었습니다.');
+      }
+    </script>
+</head>
+
+<body>
+    <%- include('../sidebar.ejs') %>
+    <div class="contents_container">
+        <h1>자산관리</h1>
+
+        <div class="card" style="width: 40rem; padding: 20px; background-color: #00B7FF">
+            <h3>입금</h3>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping" style="width: 70px">내용  </span>
+                <input id="card_input_income_contents" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+            <br />
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping" style="width: 70px">금액  </span>
+                <input id="card_input_income_amount" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+            <br />
+            <div class="input-group flex-nowrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm" style="padding-left: 0">
+                            <span class="input-group-text" id="addon-wrapping" style="width: 70px">내 지갑</span>
+                        </div>
+                        <div class="col-sm" style="padding-top: 10px">
+                            <span>한솔 지갑</span>
+                        </div>
+                        <div class="col-sm" style="padding-right: 0">
+                            <div class="dropdown" style="text-align: right">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="management_dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    지갑선택
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="management_dropdown">
+                                    <li><a class="dropdown-item" href="#">한솔 지갑</a></li>
+                                    <li><a class="dropdown-item" href="#">상현(돈모으자)</a></li>
+                                    <li><a class="dropdown-item" href="#">도훈 지갑</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <button class="btn btn-success" onclick="save(true)">저장</button>
+        </div>
+        <div class="card" style="width: 40rem; padding: 20px; background-color: linen">
+            <h3>출력</h3>
+            <div class="input-group flex-nowrap금">
+                <span class="input-group-text" id="addon-wrapping" style="width: 70px">내용  </span>
+                <input id="card_input_outcome_contents" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+            <br />
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping" style="width: 70px">금액  </span>
+                <input id="card_input_outcome_amount" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+            <br />
+            <div class="input-group flex-nowrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm" style="padding-left: 0">
+                            <span class="input-group-text" id="addon-wrapping" style="width: 70px">내 지갑</span>
+                        </div>
+                        <div class="col-sm" style="padding-top: 10px">
+                            <span>한솔 지갑</span>
+                        </div>
+                        <div class="col-sm" style="padding-right: 0">
+                            <div class="dropdown" style="text-align: right">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="management_dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    지갑선택
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="management_dropdown">
+                                    <li><a class="dropdown-item" href="#">한솔 지갑</a></li>
+                                    <li><a class="dropdown-item" href="#">상현(돈모으자)</a></li>
+                                    <li><a class="dropdown-item" href="#">도훈 지갑</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <button class="btn btn-success" onclick="save(false)">저장</button>
+        </div>
+
+    </div>
+</body>
+</html>
