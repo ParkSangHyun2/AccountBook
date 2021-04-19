@@ -3,30 +3,30 @@
 <head>
 <%- include('./head.ejs') %>
 <link rel="stylesheet" href="/stylesheets/hansol.css" type="text/css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="/stylesheets/sidebar.css" type="text/css">
+</head>
 <script>
-    function w3_open() {
-        document.getElementById("mySidebar").style.display = "block";
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
     }
     
-    function w3_close() {
-        document.getElementById("mySidebar").style.display = "none";
-        
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
     }
 </script>
-</head>
 <body>
-<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
-    <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-    <a href="#" class="w3-bar-item w3-button">내정보</a>
-    <a href="#" class="w3-bar-item w3-button">자산관리</a>
-    <a href="#" class="w3-bar-item w3-button">자산계획</a>
-    <a href="#" class="w3-bar-item w3-button">총계</a>
-  </div>
-  
-  <div class="w3-teal">
-    <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()" >☰</button>
-  </div>
+   
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#">내정보</a>
+        <a href="#">자산관리</a>
+        <a href="#">자산계획</a>
+        <a href="#">통계</a>
+    </div>
+<div id="main" class="hi">
+    <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button> 
+</div>
 </body>
 </html>
