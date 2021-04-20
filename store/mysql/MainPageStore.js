@@ -1,4 +1,5 @@
 var { connection } = require('../MysqlConnector');
+var moment = require('moment');
 
 function Receipt (model) {
   this.id = model.id;
@@ -31,4 +32,33 @@ function getReceipts(walletId, isIncome, callback) {
   });
 }
 
-module.exports = { getReceipts };
+function getReceiptInThisMonth(walletId) {
+  //
+  return new Promise((resolve) => {
+    connection.query(
+      `
+      SELECT *
+      FROM receipt
+      WHERE pocket_id=${walletId} and date BETWEEN '${moment().startOf('month').format('YYYY-MM-DD')}' AND '${moment().endOf('month').format('YYYY-MM-DD')}' ;
+    `
+      , function(err, rows, fields) {
+
+        console.log(
+          `
+            SELECT *
+            FROM receipt
+            WHERE pocket_id=${walletId} and date BETWEEN '${moment().startOf('month').format('YYYY-MM-DD')}' AND '${moment().endOf('month').format('YYYY-MM-DD')}' ;
+          `
+        );
+        if (err) {
+          throw err
+        } else {
+          const receipts = rows.map(row => new Receipt(row));
+          console.log(receipts);
+          resolve(receipts);
+        }
+      });
+  });
+}
+
+module.exports = { getReceipts, getReceiptInThisMonth };

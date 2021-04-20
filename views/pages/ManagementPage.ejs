@@ -32,17 +32,26 @@
     <%- include('../sidebar.ejs') %>
     <div class="contents_container">
         <h1>자산관리</h1>
+        <br />
+        <p>이번달 나의 지갑</p>
+        <div class="container" style="width: 40rem;">
+            <div class="row">
+                <div class="col-sm" style="color: blue">총 수입 : <%= incomes %> 원</div>
+                <div class="col-sm" style="color: red">총 지출 : <%= outcomes %> 원</div>
+                <div class="col-sm">총 대출 : 0 원</div>
+            </div>
+        </div>
 
         <div class="card" style="width: 40rem; padding: 20px; background-color: #e2e2e1">
             <h3>입금</h3>
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="addon-wrapping" style="width: 70px">내용  </span>
-                <input id="card_input_income_contents" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                <input id="card_input_income_contents" type="text" class="form-control" placeholder="내용을 입력해주세요" aria-label="Username" aria-describedby="addon-wrapping">
             </div>
             <br />
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="addon-wrapping" style="width: 70px">금액  </span>
-                <input id="card_input_income_amount" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                <input id="card_input_income_amount" type="text" class="form-control" placeholder="금액을 입력해주세요" aria-label="Username" aria-describedby="addon-wrapping">
             </div>
             <br />
             <div class="input-group flex-nowrap">
@@ -76,12 +85,12 @@
             <h3>출력</h3>
             <div class="input-group flex-nowrap금">
                 <span class="input-group-text" id="addon-wrapping" style="width: 70px">내용  </span>
-                <input id="card_input_outcome_contents" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                <input id="card_input_outcome_contents" type="text" class="form-control" placeholder="내용을 입력해주세요" aria-label="Username" aria-describedby="addon-wrapping">
             </div>
             <br />
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="addon-wrapping" style="width: 70px">금액  </span>
-                <input id="card_input_outcome_amount" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                <input id="card_input_outcome_amount" type="text" class="form-control" placeholder="금액을 입력해주세요" aria-label="Username" aria-describedby="addon-wrapping">
             </div>
             <br />
             <div class="input-group flex-nowrap">
