@@ -33,7 +33,10 @@
     <div class="contents_container">
         <h1>자산관리</h1>
         <br />
-        <p>이번달 나의 지갑</p>
+        <p>이번달에 입출금 내역을 관리합니다.</p>
+        <br />
+        <div class="dropdown-divider"></div>
+        <br />
         <div class="container" style="width: 40rem;">
             <div class="row">
                 <div class="col-sm" style="color: blue">총 수입 : <%= incomes %> 원</div>
@@ -120,7 +123,37 @@
             <br />
             <button class="btn btn-success" onclick="save(false)">저장</button>
         </div>
-
+        <br />
+        <div class="dropdown-divider"></div>
+        <br />
+        <h2 style="margin-bottom: 3%">최근 입출금 내역</h2>
+        <table>
+            <tr>
+                <th>번호</th>
+                <th>내용</th>
+                <th>금액</th>
+                <th>지갑</th>
+                <th>날짜</th>
+            </tr>
+            <%for(var i = 0; i < allReceipts.length; i++){%>
+                <tr id="myTable" style="background-color: <%= allReceipts[i].type === 'INCOME' ? 'lightblue' : 'lightpink' %>">
+                    <td><%= i + 1 %></td>
+                    <td><%= allReceipts[i].title %></td>
+                    <td><%= allReceipts[i].amount %></td>
+                    <td><%= allReceipts[i].pocket_id %></td>
+                    <td><%= new Date(allReceipts[i].date).getFullYear() + '-' + (new Date(allReceipts[i].date).getMonth() + 1).toString().padStart(2, '0') + '-' + new Date(allReceipts[i].date).getDate().toString().padStart(2, '0') %></td>
+                </tr>
+            <%}%>
+        </table>
+        <nav aria-label="Page navigation example" style="max-width: 300px">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
     </div>
 </body>
 </html>
