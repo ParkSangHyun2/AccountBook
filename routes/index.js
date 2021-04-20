@@ -4,12 +4,8 @@ const { getSample } = require('../store/mysql/SampleStore');
 var { connection } = require('../store/MysqlConnector');
 const { saveReceipt } = require('../store/mysql/ManagementStore');
 
-
-
-//단순 랜더
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', name: 'tester' });
+  res.render('MainPage', );
 });
 
 router.get('/home', async function(req, res, next) {

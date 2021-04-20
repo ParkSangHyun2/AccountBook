@@ -7,8 +7,8 @@ router.get('/main', async function(req, res, next) {
   const type = req.query.type === 'INCOME';
 
   getReceipts(1, type, (results) => {
-    console.log(results);
-    res.render('MainPage', { results: results, type: type });
+
+    res.render('MainPage', { results: JSON.stringify(results), type: type });
   });
 
 });

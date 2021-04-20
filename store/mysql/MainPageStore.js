@@ -1,5 +1,15 @@
 var { connection } = require('../MysqlConnector');
 
+function Receipt (model) {
+  this.id = model.id;
+  this.title = model.title;
+  this.amount = model.amount;
+  this.type = model.type;
+  this.pocketId = model.pocket_id;
+  this.date = model.date;
+  this.contentType = model.contents_type;
+}
+
 function getReceipts(walletId, isIncome, callback) {
   //
   const receiptType = isIncome ? 'INCOME' : 'OUTCOME';
@@ -14,7 +24,9 @@ function getReceipts(walletId, isIncome, callback) {
     if (err) {
       throw err
     } else {
-      callback(rows);
+      const receipts = rows.map(row => new Receipt(row));
+
+      callback(receipts);
     }
   });
 }

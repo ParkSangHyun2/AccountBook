@@ -17,7 +17,9 @@
     <%- include('../sidebar.ejs') %>
     <div class="contents_container">
         <h1>메인페이지</h1>
-        <div class="main_contents_graph" style="background-color: beige">그래프 공간</div>
+        <div class="main_contents_graph" style="background-color: beige">
+            <canvas id="consumpsion_graph"></canvas>
+        </div>
 
         <br />
 
@@ -82,8 +84,58 @@
                 </tr>
             <%}%>
         </table>
-
+        <div id="samples"></div>
     </div>
+
+    <script>
+
+      const DATA_COUNT = 5;
+      const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+      document.getElementById('samples').innerText = '<%= results.map(result => result.title) %>';
+
+      const values = '<%= results.map(result => result.title) %>';
+      const parsedValues = values.split(',');
+
+      var data = {
+        labels: parsedValues,
+        datasets: [
+          {
+            label: 'Dataset 1',
+            data: <%= JSON.stringify(results.map(result => result.amount)) %>,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+            ],
+          }
+        ]
+      };
+
+      const config = {
+        type: 'pie',
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: `최근 ${<%= type %> ? '수입' : '지출'} 비율`
+            }
+          }
+        },
+      };
+
+      var myChart = new Chart(
+        document.getElementById('consumpsion_graph'),
+        config
+      );
+    </script>
 </body>
 </html>
 
