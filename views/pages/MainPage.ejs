@@ -84,14 +84,12 @@
                 </tr>
             <%}%>
         </table>
-        <div id="samples"></div>
     </div>
 
     <script>
 
       const DATA_COUNT = 5;
       const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
-      document.getElementById('samples').innerText = '<%= results.map(result => result.title) %>';
 
       const values = '<%= results.map(result => result.title) %>';
       const parsedValues = values.split(',');

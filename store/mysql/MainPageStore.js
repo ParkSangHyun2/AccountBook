@@ -25,7 +25,7 @@ function getReceipts(walletId, isIncome, callback) {
       throw err
     } else {
       const receipts = rows.map(row => new Receipt(row));
-
+      console.log(receipts);
       callback(receipts);
     }
   });

@@ -8,7 +8,7 @@ router.get('/main', async function(req, res, next) {
 
   getReceipts(1, type, (results) => {
 
-    res.render('MainPage', { results: JSON.stringify(results), type: type });
+    res.render('MainPage', { results: results, type: type });
   });
 
 });
