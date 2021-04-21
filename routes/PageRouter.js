@@ -6,11 +6,12 @@ var { getReceipts, getReceiptInThisMonth, getAllReceipts, getTotalCount, getAllM
 router.get('/main', async function(req, res, next) {
   //
   const type = req.query.type === 'INCOME';
+  const walletId = req.query.walletId || 1;
   /* 지갑의 배열을 가지고 온다.*/
   const myPockets = await getAllMyPocket();
 
-  getReceipts(1, type, (results) => {
-    res.render('MainPage', { results: results, type: type, pocketList: myPockets /* pocketList 라는 이름으로 화면에서 사용할수 있게함*/});
+  getReceipts(walletId, type, (results) => {
+    res.render('MainPage', { results: results, type: type, pocketList: myPockets, walletId:walletId /* pocketList 라는 이름으로 화면에서 사용할수 있게함*/});
   });
 
 });

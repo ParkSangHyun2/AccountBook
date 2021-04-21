@@ -3,6 +3,7 @@
 <head>
     <%- include('../head.ejs') %>
     <link rel="stylesheet" href="/stylesheets/hansol.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/wrapper.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <script>
         let base64Image = '';
@@ -39,10 +40,9 @@
 </head>
 
 <body>
-
     <%- include('../sidebar.ejs') %>
     <div class="contents_container">
-    <h1>나의 지갑</h1>
+        <h1 style="text-align: center">나의 지갑</h1>
 
         <div style="max-width:700px;margin:auto">
             <div class="input-group mb-1" style="max-width:700px;margin:auto;display: flex;justify-content: center;">
