@@ -17,4 +17,5 @@ function saveReceipt(contents, amount, walletId, isIncome, date, callback) {
   });
 }
 
-module.exports = { saveReceipt };
+
+module.exports = { saveReceipt};

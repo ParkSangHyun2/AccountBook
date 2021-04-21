@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var { getReceipts } = require('../store/mysql/MainPageStore');
+var { getReceipts} = require('../store/mysql/MainPageStore');
 
 
 router.get('/receipt', function(req, res, next) {
