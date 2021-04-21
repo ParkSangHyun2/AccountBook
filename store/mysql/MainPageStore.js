@@ -16,6 +16,7 @@ function MyPocket(model) {
   this.name = model.name;
   this.purpose = model.purpose;
   this.nickname = model.nickname;
+  this.image = model.image.toString('utf-8');
 }
 
 function getReceipts(walletId, isIncome, callback) {
@@ -67,37 +68,48 @@ function getTotalCount(walletId) {
   //
   const query =
     (`
-      COUNT *
-      FROM receipt
+        SELECT count(*) AS counts
+        FROM receipt
+        WHERE pocket_id=${walletId}
     `);
 
   return new Promise((resolve) => {
     //
+    console.log(query);
     connection.query(query, function(err, rows, fields) {
       //
       if (err) {
         throw err
       } else {
-        const receipts = rows.map(row => new Receipt(row));
-        resolve(receipts);
+        resolve(rows[0].counts);
       }
     });
   });
 }
 
-function getAllReceipts(walletId) {
+function getAllReceipts(walletId, page) {
   //
+  /* 테이블에서 한번에 보여줄 row 갯수 */
+  const LIMIT = 5;
+
+  /* pocket_id에 해당하는 전체리스트를 가지고오되, 선택한 page에 해당하는 데이터만 쿼리 */
   const query =
     (`
       SELECT *
       FROM receipt
       WHERE pocket_id=${walletId}
+      LIMIT ${(page - 1) * LIMIT},${LIMIT} 
     `);
 
+  /* JS는 기본적으로 비동기(요청에 대한 응답이 바로오지않는경우 다음코드로 그냥 넘어감 - 여기서는 DB에 접근을해서 가져오기때문에 바로응답이 오지않음)
+  *  그래서 Promise를 사용하는데, Promise는 우선 순차적으로 처리될 내용을 내부 콜백함수에 정의해놓고, 다음코드로 넘어가긴하지만 결과적으로는 받은 결과값을 언젠가는 다음코드가 볼수 있게 보관(유지)해주는 역할
+  *  만약 Promise를 쓰지않았다면 이함수내에서 쿼리를 하고 리턴을 받는 또다른 함수에서는 undefined 가 넘거가겠지만 Promise를 사용하면 일단 Promise를 리턴받고 언젠가는Promise내부에서 처리된 내용이 리턴을 받는 또다른 함수에서 정상적으로 받을수 있게해줌
+  */
   return new Promise((resolve) => {
     //
     connection.query(query, function (err, rows, fields) {
       //
+      console.log(query);
       if (err) {
         throw err
       } else {
@@ -121,6 +133,7 @@ function getAllMyPocket() {
     connection.query(query, function (err, rows, fields) {
       //
       if (err) {
+        console.log('AaAAAAAAA' + err);
         throw err
       } else {
         const myPockets = rows.map(row => new MyPocket(row));

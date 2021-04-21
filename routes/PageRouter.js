@@ -18,20 +18,32 @@ router.get('/main', async function(req, res, next) {
 
 router.get('/management', async function(req, res, next) {
   //
+  const historyPage = req.query.historypage || 1;
+
   var results = await getReceiptInThisMonth(1);
   var incomes = results.filter(result => result.type === 'INCOME').map(result => result.amount).reduce((acc, next) => acc + next);
   var outcomes = results.filter(result => result.type === 'OUTCOME').map(result => result.amount).reduce((acc, next) => acc + next);
 
-  // const totalCount = await getTotalCount(1);
-  const allReceipts = await getAllReceipts(1);
+  const totalCount = await getTotalCount(1);
+  const allReceipts = await getAllReceipts(1, historyPage);
 
-  res.render('ManagementPage', { incomes: incomes, outcomes: outcomes, allReceipts: allReceipts });
+  res.render(
+    'ManagementPage',
+    {
+      incomes: incomes,
+      outcomes: outcomes,
+      allReceipts: allReceipts,
+      totalCount: totalCount,
+      page: historyPage,
+    });
 
 });
 
 router.get('/profile', async function(req, res, next) {
   //
-  res.render('ProfilePage', {});
+  const myPockets = await getAllMyPocket();
+
+  res.render('ProfilePage', {myPockets: myPockets});
 });
 
 router.get('/statistics', async function(req, res, next) {

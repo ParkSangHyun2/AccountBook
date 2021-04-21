@@ -8,6 +8,8 @@
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "axios": "^0.21.1",
+    "blob-util": "^2.0.2",
+    "body-parser": "^1.19.0",
     "bootstrap": "^5.0.0-beta3",
     "bootstrap-icons": "^1.4.1",
     "chart.js": "^3.1.0",
@@ -17,6 +19,7 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1"

@@ -33,3 +33,19 @@
 .table_switch {
     float: right;
 }
+
+.page-item .page-link  {
+    color: #111111!important;
+}
+
+.page-item .page-link.active {
+    background-color: #0d6efd!important;
+}
+
+
+table {
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
