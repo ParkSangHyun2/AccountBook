@@ -5,28 +5,36 @@
     <meta charset="UTF-8">
 
     <script>
-      let isIncome = false;
-
       function tabChange(type) {
-        isIncome = (type === 'INCOME');
+        const selectedType = type ? 'INCOME' : 'OUTCOME';
 
-        location.href = `/accountbook/main?type=${type}`;
+        location.href = `/accountbook/main?type=${selectedType}&walletId=<%= walletId %>`;
       }
 
-
-    </script>
-</head>
-
-<body>
-    <%- include('../sidebar.ejs') %>
-    <script>
       function handleClickPocket(index) {
         //
         var list = <%- JSON.stringify(pocketList) %>;
         document.getElementById("main_page_wallet_dropdown").innerText = list[index].name ;
 
-          }
+
+        selectedWallet = list[index].id;
+        location.href = `/accountbook/main?type=<%= type%>&walletId=${selectedWallet}`;
+      }
+
+      window.onload  = function() {
+        var walletId = <%= walletId %>;
+
+        if(walletId) {
+          var list = <%- JSON.stringify(pocketList) %>;
+          const target = list.find(model => model.id === walletId);
+          document.getElementById("main_page_wallet_dropdown").innerText = target.name ;
+        }
+      }
     </script>
+</head>
+
+<body>
+    <%- include('../sidebar.ejs') %>
     <div class="contents_container">
         <h1>메인페이지</h1>
         <div class="main_contents_graph" style="background-color: beige">
@@ -62,7 +70,7 @@
                                 autocomplete="off"
                                 <%= type ? 'checked' : null %>
                         >
-                        <label class="btn btn-outline-success" for="success-outlined" onclick="tabChange('INCOME')">수입</label>
+                        <label class="btn btn-outline-success" for="success-outlined" onclick="tabChange(true)">수입</label>
                     </div>
                     <div class="table_switch">
                         <input
@@ -73,7 +81,7 @@
                                 autocomplete="off"
                                 <%= !type ? 'checked' : null %>
                         >
-                        <label class="btn btn-outline-danger" for="danger-outlined" onclick="tabChange('OUTCOME')">지출</label>
+                        <label class="btn btn-outline-danger" for="danger-outlined" onclick="tabChange(false)">지출</label>
                     </div>
                 </div>
             </div>

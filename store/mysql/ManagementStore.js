@@ -17,5 +17,18 @@ function saveReceipt(contents, amount, walletId, isIncome, date, callback) {
   });
 }
 
+function saveWallet(name, purpose, nickname, image) {
+  //
+  const query =     `
+      INSERT INTO my_pocket(name, purpose, nickname, image)
+      VALUES('${name}', '${purpose}', '${nickname}', '${image}');
+    `
+  ;
+  connection.query(query, function(err, rows, fields) {
+      if (err) {
+        console.log('saveWallet => ' + err);
+      }
+    });
+}
 
-module.exports = { saveReceipt};
+module.exports = { saveReceipt, saveWallet };
