@@ -26,9 +26,23 @@ function saveWallet(name, purpose, nickname, image) {
   ;
   connection.query(query, function(err, rows, fields) {
       if (err) {
-        console.log('saveWallet => ' + err);
+        console.log('saveWallet => ' + rows);
       }
     });
 }
 
-module.exports = { saveReceipt, saveWallet };
+function mapWalletAndBank(walletId, bankId) {
+  const query =     `
+      INSERT INTO my_pocket_financial_institution(my_pocket_id, financial_institution_id)
+      VALUES('${walletId}', '${bankId}');
+    `
+  ;
+  connection.query(query, function(err, rows, fields) {
+    if (err) {
+      console.log('save mapping => ' + rows);
+    }
+  });
+}
+
+
+module.exports = { saveReceipt, saveWallet, mapWalletAndBank };

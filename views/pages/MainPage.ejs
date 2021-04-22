@@ -29,6 +29,12 @@
           const target = list.find(model => model.id === walletId);
           document.getElementById("main_page_wallet_dropdown").innerText = target.name ;
         }
+
+        axios.get('/store/wallet/bank/image', {params:{walletId: walletId}}).then((response) => {
+          debugger;
+          let image = response.data.convertedImage;
+          document.getElementById('main_bank_image').setAttribute('src', image);
+        });
       }
     </script>
 </head>
@@ -38,6 +44,7 @@
     <div class="contents_container">
         <h1>메인페이지</h1>
         <div class="main_contents_graph" style="background-color: beige">
+            <img id="main_bank_image" class="profile_img" src="/images/avatar.png" style="width:50px; float: right">
             <canvas id="consumpsion_graph"></canvas>
         </div>
 

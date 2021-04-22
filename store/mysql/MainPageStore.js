@@ -87,6 +87,28 @@ function getTotalCount(walletId) {
   });
 }
 
+function getAllBank() {
+  //
+  const query =
+    (`
+      SELECT *
+      FROM financial_institution
+    `);
+
+  return new Promise((resolve) => {
+    //
+    console.log(query);
+    connection.query(query, function(err, rows, fields) {
+      //
+      if (err) {
+        throw err
+      } else {
+        resolve(rows);
+      }
+    });
+  });
+}
+
 function getAllReceipts(walletId, page) {
   //
   /* 테이블에서 한번에 보여줄 row 갯수 */
@@ -133,7 +155,6 @@ function getAllMyPocket() {
     connection.query(query, function (err, rows, fields) {
       //
       if (err) {
-        console.log('AaAAAAAAA' + err);
         throw err
       } else {
         const myPockets = rows.map(row => new MyPocket(row));
@@ -143,4 +164,31 @@ function getAllMyPocket() {
   });
 }
 
-module.exports = { getReceipts, getReceiptInThisMonth, getAllReceipts, getTotalCount, getAllMyPocket };
+function getBankImage(walletId) {
+  //
+  const query =
+    (`
+        SELECT image
+        FROM financial_institution fi
+        WHERE id = (
+            SELECT financial_institution_id
+            FROM my_pocket_financial_institution mpfi
+            WHERE my_pocket_id = ${walletId}
+        )
+    `);
+
+  return new Promise((resolve) => {
+    //
+    connection.query(query, function (err, rows, fields) {
+      //
+      if (err) {
+        throw err
+      } else {
+        const image = rows[0].image;
+        resolve(image);
+      }
+    });
+  });
+}
+
+module.exports = { getReceipts, getReceiptInThisMonth, getAllReceipts, getTotalCount, getAllMyPocket, getAllBank, getBankImage };

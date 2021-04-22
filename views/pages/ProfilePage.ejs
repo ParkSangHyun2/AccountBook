@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <script>
         let base64Image = '';
+        let selectedBankId = 0;
 
         function uploadImage(file) {
           const image = file.files[0];
@@ -26,15 +27,23 @@
           let purpose = document.getElementById('input_pocket_purpose')?.value;
           let nickname = document.getElementById('input_pocket_nickname')?.value;
             debugger;
-          if(_.isEmpty(name) || _.isEmpty(purpose) || _.isEmpty(nickname) || _.isEmpty(base64Image)) {
+          if(_.isEmpty(name) || _.isEmpty(purpose) || _.isEmpty(nickname) || _.isEmpty(base64Image) || selectedBankId === 0) {
             alert('필요한 정보를 모두 입력해주세요');
           } else {
-            axios.post('/store/wallet', {name, purpose: purpose.toString(), nickname, image: base64Image}).then(() => {
-              location.reload();
-              alert('저장되었습니다.');
+            axios.post('/store/wallet', {name, purpose: purpose.toString(), nickname, image: base64Image}).then((response) => {
+              axios.post('/store/wallet/map', {walletId: response.data.savedModel.id, bankId: selectedBankId}).then(() => {
+                location.reload();
+                alert('저장되었습니다.');
+              });
             });
 
           }
+        }
+
+        function handleChangeBank(bankId) {
+            //
+          debugger;
+          selectedBankId = bankId;
         }
     </script>
 </head>
@@ -67,23 +76,20 @@
                 <input id="input_pocket_nickname" type="text" class="form-control" placeholder="지갑 별명을 입력해주세요" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
 
+            <br/>
+            <h3>은행 선택</h3>
             <div class="box">
                 <div id="tab">
                     <ul>
-                        <li>
-                            <div style="max-width: 100px; max-height: 100px">
-                                <img class="profile_img" src="/images/avatar.png" style="width:100%">
-                                <p>신한은행</p>
-                                <input type="radio" name="bank">
-                            </div>
-                        </li>
-                        <li>
-                            <div style="max-width: 100px; max-height: 100px">
-                                <img class="profile_img" src="/images/avatar.png" style="width:100%">
-                                <p>국민은행</p>
-                                <input type="radio" name="bank">
-                            </div>
-                        </li>
+                        <% for(let index = 0; index < banks.length; index++) { %>
+                            <li>
+                                <div style="max-width: 100px; max-height: 100px">
+                                    <img class="profile_img" src="<%= banks[index].image %>" style="width:100%">
+                                    <p><%= banks[index].name %></p>
+                                    <input type="radio" name="bank" value='<%= banks[index].id %>' onchange="handleChangeBank(<%= banks[index].id %>)">
+                                </div>
+                            </li>
+                        <% } %>
                     </ul>
                 </div>
             </div>

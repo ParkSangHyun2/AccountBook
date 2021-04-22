@@ -1,6 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var { getReceipts, getReceiptInThisMonth, getAllReceipts, getTotalCount, getAllMyPocket } = require('../store/mysql/MainPageStore');
+var {
+  getReceipts,
+  getReceiptInThisMonth,
+  getAllReceipts,
+  getTotalCount,
+  getAllMyPocket,
+  getAllBank
+} = require('../store/mysql/MainPageStore');
 
 /* 메인페이지 */
 router.get('/main', async function(req, res, next) {
@@ -36,6 +43,7 @@ router.get('/management', async function(req, res, next) {
       allReceipts: allReceipts,
       totalCount: totalCount,
       page: historyPage,
+
     });
 
 });
@@ -43,8 +51,9 @@ router.get('/management', async function(req, res, next) {
 router.get('/profile', async function(req, res, next) {
   //
   const myPockets = await getAllMyPocket();
+  const banks = await getAllBank();
 
-  res.render('ProfilePage', {myPockets: myPockets});
+  res.render('ProfilePage', {myPockets: myPockets, banks: banks,});
 });
 
 router.get('/statistics', async function(req, res, next) {
