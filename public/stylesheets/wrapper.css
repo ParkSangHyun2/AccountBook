@@ -49,3 +49,6 @@ table {
     overflow: hidden;
 }
 
+.box .profile_img{
+   border: 1px #000;
+}

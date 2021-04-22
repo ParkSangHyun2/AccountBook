@@ -149,7 +149,7 @@
                 <th>날짜</th>
             </tr>
             <%for(var i = 0; i < allReceipts.length; i++){%>
-                <tr id="myTable" style="background-color: <%= allReceipts[i].type === 'INCOME' ? 'lightblue' : 'lightpink' %>">
+                <tr id="myTable" style="background-color: <%= allReceipts[i].type === 'INCOME' ? 'rgb(212, 244, 255)' : 'rgb(255, 218, 223)' %>">
                     <td><%= totalCount - ((page-1) * 5) - i %></td>
                     <td><%= allReceipts[i].title %></td>
                     <td><%= allReceipts[i].amount %></td>
