@@ -120,7 +120,8 @@ function getAllReceipts(walletId, page) {
       SELECT *
       FROM receipt
       WHERE pocket_id=${walletId}
-      LIMIT ${(page - 1) * LIMIT},${LIMIT} 
+      ORDER BY date DESC
+      LIMIT ${(page - 1) * LIMIT},${LIMIT};
     `);
 
   /* JS는 기본적으로 비동기(요청에 대한 응답이 바로오지않는경우 다음코드로 그냥 넘어감 - 여기서는 DB에 접근을해서 가져오기때문에 바로응답이 오지않음)
