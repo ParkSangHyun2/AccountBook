@@ -4,43 +4,44 @@
     <link rel="stylesheet" href="/stylesheets/wrapper.css" type="text/css">
     <meta charset="UTF-8">
 
-    <script>
-      function tabChange(type) {
-        const selectedType = type ? 'INCOME' : 'OUTCOME';
+<script>
+  function tabChange(type) {
+    const selectedType = type ? 'INCOME' : 'OUTCOME';
 
-        location.href = `/accountbook/main?type=${selectedType}&walletId=<%= walletId %>`;
-      }
+    location.href = `/accountbook/main?type=${selectedType}&walletId=<%= walletId %>`;
+  }
 
-      function handleClickPocket(index) {
-        //
-        var list = <%- JSON.stringify(pocketList) %>;
-        document.getElementById("main_page_wallet_dropdown").innerText = list[index].name ;
+  function handleClickPocket(index) {
+    //
+    var list = <%- JSON.stringify(pocketList) %>;
+    document.getElementById("main_page_wallet_dropdown").innerText = list[index].name ;
 
 
-        selectedWallet = list[index].id;
-        location.href = `/accountbook/main?type=<%= type%>&walletId=${selectedWallet}`;
-      }
+    selectedWallet = list[index].id;
+    location.href = `/accountbook/main?type=<%= type%>&walletId=${selectedWallet}`;
+  }
 
-      window.onload  = function() {
-        var walletId = <%= walletId %>;
+  window.onload  = function() {
+    var walletId = <%= walletId %>;
 
-        if(walletId) {
-          var list = <%- JSON.stringify(pocketList) %>;
-          const target = list.find(model => model.id === walletId);
-          document.getElementById("main_page_wallet_dropdown").innerText = target.name ;
-        }
-      }
-    </script>
+    if(walletId) {
+      var list = <%- JSON.stringify(pocketList) %>;
+      const target = list.find(model => model.id === walletId);
+      document.getElementById("main_page_wallet_dropdown").innerText = target.name ;
+    }
+  }
+</script>
 </head>
 
 <body>
     <%- include('../sidebar.ejs') %>
+    
     <div class="contents_container">
         <h1>메인페이지</h1>
-        <div class="main_contents_graph" style="background-color: beige">
+        <div class="main_contents_graph" style="background-color: rgb(250, 250, 236)">
             <canvas id="consumpsion_graph"></canvas>
         </div>
-
+        <br>
         <br />
         <div class="dropdown-divider"></div>
         <br />
